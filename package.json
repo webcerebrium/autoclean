@@ -1,0 +1,30 @@
+{
+  "name": "autoclean",
+  "version": "1.0.0",
+  "description": "Command Line auto cleaner - for removing expired files",
+  "bin": {
+    "autoclean": "./bin.js"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webcerebrium/autoclean.git"
+  },
+  "keywords": [],
+  "author": "Web Cerebrium <webcerebrium@gmail.com> (https://webcerebrium.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webcerebrium/autoclean/issues"
+  },
+  "homepage": "https://github.com/webcerebrium/autoclean#readme",
+  "dependencies": {
+    "fs-extra": "^5.0.0",
+    "minimist": "^1.2.0"
+  }
+}
