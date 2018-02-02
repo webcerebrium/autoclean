@@ -7,7 +7,8 @@ const parseArgs = require('minimist');
 // helpers to get parameters:
 const commandArgs = parseArgs(process.argv, { '--': true });
 const isVerbose = () => (commandArgs.v || commandArgs.verbose);
-const isDryRun = () => [1, '1'].indexOf(commandArgs['dry-run'] || commandArgs.dryRun) !== 1;
+const dry = commandArgs['dry-run'] || commandArgs.dryRun;
+const isDryRun = () => (!!dry && ([true, 'true', 'yes', '1'].indexOf(dry) !== 1) && ([false, 'false', 'no', '0'].indexOf(dry) === -1));
 const getDays = () => (commandArgs.d || commandArgs.days);
 const getMaxDepth = () => (commandArgs['max-depth'] || commandArgs.maxDepth || 1);
 const getPath = () => (commandArgs.path || commandArgs._[2]);
@@ -22,8 +23,8 @@ if (isVerbose()) {
   console.log('PATH: ', getPath());
   console.log('DAYS: ', getDays());
   console.log('MAX DEPTH: ', getMaxDepth());
+  console.log('DRY RUN: ', isDryRun());
 }
-console.log('DRY RUN: ', isDryRun());
 
 const filelist = [];
 const dirlist = [];
@@ -41,6 +42,8 @@ const walkSync = (dir) => {
       } else {
         filelist.push(filePath);
       }
+    } else if (stat.isDirectory()) {
+      walkSync(filePath);
     }
   });
 };
